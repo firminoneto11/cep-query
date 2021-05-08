@@ -43,7 +43,6 @@
     padding: 1rem;
     border-radius: 5px;
     border: #5d5d5d 2px solid;
-
 }
 
 #input:hover {
@@ -51,7 +50,7 @@
 }
 
 #input:focus {
-    border: rgb(86, 4, 194) 2px solid;
+    border: #0c06f7 2px solid;
     outline: none;
 }
 
@@ -77,6 +76,7 @@
     background-color: #88d453;
     color: #eeeeee;
     border: #eeeeee 2px solid;
+    cursor: pointer;
 }
 
 #search:active {
