@@ -1,0 +1,10 @@
+
+.footer {
+    text-align: center;
+    color: #eeeeee;
+    font-size: 0.8rem;
+    font-family: Helvetica;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    margin-top: 20%;
+}

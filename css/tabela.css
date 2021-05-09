@@ -1,0 +1,49 @@
+@keyframes transitionIn {
+    from {
+        opacity: 0;
+        transform: rotateX(-10deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: rotateX(0);
+    }
+}
+
+.result {
+    margin-top: 1%;
+}
+
+.table {
+    animation: transitionIn 1s;
+    border-collapse: collapse;
+    margin: 25px;
+    font-size: 1rem;
+    min-width: fit-content;
+    width: 50%;
+    background-color: #B1B6A6;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    padding: 500px;
+    font-family: Helvetica;
+    text-align: left;
+    border: #696773 solid 1px;
+    border-radius: 5px;
+    display: none;
+}
+
+.table thead tr {
+    background-color: #696773;
+    color: #eeeeee;
+    font-weight: normal;
+}
+
+.table th, .table td {
+    padding: 15px, 15px;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}

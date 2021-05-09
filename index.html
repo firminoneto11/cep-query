@@ -7,17 +7,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/separator.css">
+    <link rel="stylesheet" href="./css/tabela.css">
+    <link rel="stylesheet" href="./css/footer.css">
     <title>Consulta CEP</title>
 </head>
 
 <body id="body">
-    <h1 class="title">Consulte a localidade de um CEP</h1>
+    <header>
+        <h1 class="title">Consulte a localidade de um CEP</h1>
+    </header>
 
-    <div class="mini_form">
-        <input id="input" class="input" type="text" placeholder="Insira um número de CEP (Apenas números)."
-            autocomplete="off">
-        <button id="search" class="search">Buscar</button>
-    </div>
+    <main>
+        <div class="mini_form">
+            <input id="input" class="input" type="text" placeholder="Insira um número de CEP (Apenas números)."
+                autocomplete="off">
+            <button id="search" class="search">Buscar</button>
+        </div>
+
+        <hr id="separator" class="separator">
+
+        <div class="result">
+            <table id="table" class="table">
+                <thead>
+                    <tr>
+                        <th>Rua</th>
+                        <th>Bairro</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                        <th>Complemento</th>
+                        <th>CEP</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tbody">
+                    <tr></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!--
+    <footer>
+        <p class="footer">© 2021 Firmino Neto</p>
+    </footer>
+    -->
 
     <!--Calling my script-->
     <script src=" ./js/script.js"></script>
