@@ -6,34 +6,21 @@ const focus = (css_text) => {
 }
 
 const error_layout = (element) => {
-    element.style.border = "rgb(255, 128, 128) solid 2px"
+    // Changing class name
+    element.classList.remove('input')
+    element.classList.add('input_error')
     element.placeholder = "O CEP informado é inválido. Tente novamente, utilizando apenas números!"
-
-    // Event Listeners
-    element.addEventListener("mouseover", function () {
-        this.style.border = "red solid 2px"
-    })
-    element.addEventListener("mouseout", function () {
-        this.style.border = "rgb(255, 128, 128) solid 2px"
-    })
 }
 
 const normal_layout = (element) => {
-    element.style.border = "#5d5d5d 2px solid"
+    element.classList.remove('input_error')
+    element.classList.add('input')
     element.placeholder = "Insira um número de CEP (Apenas números)."
-
-    // Event Listeners
-    element.addEventListener("mouseover", function () {
-        this.style.border = "#88d453 2px solid"
-    })
-    element.addEventListener("mouseout", function () {
-        this.style.border = "#5d5d5d 2px solid"
-    })
 }
 
 const get_json = () => {
     // Storing the typed value in a variable
-    let input_element = document.getElementById('input')
+    let input_element = document.getElementsByClassName('input')[0]
     let typed_cep = input_element.value
     input_element.value = ""
 
@@ -51,7 +38,6 @@ const get_json = () => {
             return null
         }
     }
-
     normal_layout(input_element)
     const url = `https://viacep.com.br/ws/${typed_cep}/json/`
     console.log(url)
