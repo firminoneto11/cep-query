@@ -9,6 +9,8 @@
     font-size: 2rem;
     color: #eeeeee;
     margin-top: 2.5%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
 .mini_form {
@@ -54,7 +56,8 @@
     outline: none;
 }
 
-/* This part will change the CSS previous configurations to new ones */
+/* This part will change the CSS previous configurations to new ones if the user types a not valid cep in the
+input field. */
 .input_error {
     min-width: fit-content;
     width: 80%;
@@ -77,7 +80,7 @@
 }
 
 /*Search button*/
-#search {
+.search {
     min-width: fit-content;
     width: 25%;
     margin-top: 1%;
@@ -95,14 +98,14 @@
     border: #5d5d5d 2px solid;
 }
 
-#search:hover {
+.search:hover {
     background-color: #88d453;
     color: #eeeeee;
     border: #eeeeee 2px solid;
     cursor: pointer;
 }
 
-#search:active {
+.search:active {
     background-color: aquamarine;
     color: black;
     border: #5d5d5d 2px solid;

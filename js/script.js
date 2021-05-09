@@ -1,54 +1,95 @@
 
-const focus = (css_text) => {
-    const style_tag = document.createElement('style')
-    style_tag.appendChild(document.createTextNode(css_text))
-    document.getElementsByTagName('head')[0].appendChild(style_tag)
-}
+const get_url_or_null = () => {
+    let element = document.getElementById('input')
+    let validation = validate_cep(element.value)
+    const url = `https://viacep.com.br/ws/${element.value}/json/`
+    element.value = ""
 
-const error_layout = (element) => {
-    // Changing class name
-    element.classList.remove('input')
-    element.classList.add('input_error')
-    element.placeholder = "O CEP informado é inválido. Tente novamente, utilizando apenas números!"
-}
-
-const normal_layout = (element) => {
-    element.classList.remove('input_error')
-    element.classList.add('input')
-    element.placeholder = "Insira um número de CEP (Apenas números)."
-}
-
-const get_json = () => {
-    // Storing the typed value in a variable
-    let input_element = document.getElementsByClassName('input')[0]
-    let typed_cep = input_element.value
-    input_element.value = ""
-
-    // Treating the inputted data
-    const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    if (typed_cep.length === 0) {
-        error_layout(input_element)
-        return null
-    }
-    for (let i in typed_cep) {
-        if (numbers.includes(typed_cep[i])) {
-            continue
+    // This code will check if the input given is valid as a CEP number and will return the url if it is
+    // or false if it is not. Also, it will apply some visual changes to the input element to show the user
+    // that what he typed is not valid.
+    if (validation) {
+        if (element.className === "input") {
+            element.placeholder = "Insira um número de CEP (Apenas números)."
+            return url
         } else {
-            error_layout(input_element)
+            element.placeholder = "Insira um número de CEP (Apenas números)."
+            element.classList.remove('input_error')
+            element.classList.add('input')
+            return url
+        }
+    } else {
+        if (element.className === "input") {
+            element.placeholder = "O CEP informado é inválido. Tente novamente, utilizando apenas números!"
+            element.classList.remove('input')
+            element.classList.add('input_error')
+            return null
+
+        } else {
+            element.placeholder = "O CEP informado é inválido. Tente novamente, utilizando apenas números!"
             return null
         }
     }
-    normal_layout(input_element)
-    const url = `https://viacep.com.br/ws/${typed_cep}/json/`
-    console.log(url)
 }
 
-
-// Async function to get the API Data
-async function getEmployees(url) {
-    let response = await fetch(url)
-    let data = await response.json()
-    return data
+const cep_not_exists = () => {
+    // This function will change the css layout of the input field if the API doesn't returns any valid value
+    const element = document.getElementById("input")
+    if (element.className === 'input') {
+        element.placeholder = "O CEP informado não existe. Tente novamente."
+        element.classList.remove('input')
+        element.classList.add('input_error')
+    } else {
+        element.placeholder = "O CEP informado não existe. Tente novamente."
+    }
 }
 
-getEmployees().then((data) => console.log(data))
+const validate_cep = (inputted_string) => {
+    /*
+    This function is expecting to receive a string and will check if the whole string is a valid number.
+    If it is, it will return true and if it isn't, false.
+    */
+    const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    if (inputted_string.length !== 8) {
+        return false
+    }
+    for (let index in inputted_string) {
+        if (numbers.includes(inputted_string[index])) {
+            continue
+        } else {
+            return false
+        }
+    }
+    return true
+}
+
+const get_json = () => {
+    const url_or_null = get_url_or_null()
+    if (url_or_null === null) {
+        return null
+    } else {
+        const request = new XMLHttpRequest()
+        request.open('GET', url_or_null)
+        request.send()
+        request.onload = () => {
+            if (request.status === 200) {
+                let json_object = JSON.parse(request.response)
+                const properties_list = []
+                for (let attribute in json_object) {
+                    properties_list.push(json_object[attribute])
+                }
+                if (properties_list.length === 1) {
+                    cep_not_exists()
+                } else {
+                    console.log(properties_list)
+                }
+            } else {
+                console.log('A API não está funcionando no momento.')
+            }
+        }
+
+    }
+}
+
+// Defining the trigger function to the button
+document.getElementById("search").addEventListener('click', get_json)
