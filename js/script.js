@@ -72,6 +72,7 @@ const update_table = () => {
     new_tbody.id = 'tbody'
     document.getElementById('table').appendChild(new_tbody)
     document.getElementById('tbody').appendChild(new_tr)
+    document.getElementById('table').style.display = 'none'
 }
 
 const get_json = () => {
@@ -110,8 +111,11 @@ const get_json = () => {
                     // Here we are inserting the data filtered from the JSON returned by the API
                     const tbody = document.getElementById('tbody')
                     for (let attribute in address) {
+                        if (address[attribute].length === 0) {
+                            address[attribute] = 'N/T'
+                        }
                         let table_data = document.createElement('td')
-                        table_data.innerText = address[attribute]
+                        table_data.innerHTML = address[attribute]
                         tbody.firstChild.appendChild(table_data)
                     }
                     let table = document.getElementById('table')
@@ -128,3 +132,12 @@ const get_json = () => {
 
 // Defining the trigger function to the button
 document.getElementById("search").addEventListener('click', get_json)
+
+// Adding the 'enter' button to also trigger the event
+const input_field = document.getElementById("input");
+input_field.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("search").click();
+    }
+});

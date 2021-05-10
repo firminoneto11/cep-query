@@ -28,7 +28,7 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     padding: 500px;
     font-family: Helvetica;
-    text-align: left;
+    text-align: center;
     border: #696773 solid 1px;
     border-radius: 5px;
     display: none;
@@ -41,7 +41,8 @@
 }
 
 .table th, .table td {
-    padding: 15px, 15px;
+    padding: 15px;
+    border-right: grey solid 1px;
 }
 
 .table tbody tr {
