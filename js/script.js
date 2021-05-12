@@ -72,22 +72,29 @@ const update_table = () => {
     new_tbody.id = 'tbody'
     document.getElementById('table').appendChild(new_tbody)
     document.getElementById('tbody').appendChild(new_tr)
-    document.getElementById('table').style.display = 'none'
+    const table = document.getElementById('table')
+    if (table.style.display === 'block') {
+        table.style.display = 'none'
+    } else {
+        document.getElementById('table').style.display = 'none'
+    }
 }
 
 const get_json = () => {
+    // Restarting the css display from the table
+    update_table()
     // Getting either the url or a null value
     const url_or_null = get_url_or_null()
     const properties_list = []
     if (url_or_null === null) {
         return null
     } else {
+        // Sending a new request to the API
         const request = new XMLHttpRequest()
         request.open('GET', url_or_null)
         request.send()
         request.onload = () => {
             if (request.status === 200) {
-                update_table()
                 let json_object = JSON.parse(request.response)
                 for (let attribute in json_object) {
                     if (attribute == 'logradouro' || attribute == 'bairro' || attribute == 'localidade' || attribute == 'uf' || attribute == 'complemento' || attribute == 'cep') {
@@ -108,16 +115,37 @@ const get_json = () => {
                         'complemento': properties_list[2],
                         'cep': properties_list[0]
                     }
-                    // Here we are inserting the data filtered from the JSON returned by the API
+                    // Inserting the data filtered from the JSON returned by the API
                     const tbody = document.getElementById('tbody')
                     for (let attribute in address) {
                         if (address[attribute].length === 0) {
                             address[attribute] = 'N/T'
                         }
                         let table_data = document.createElement('td')
+                        table_data.classList.add('td')
                         table_data.innerHTML = address[attribute]
                         tbody.firstChild.appendChild(table_data)
+                        switch (attribute) {
+                            case 'rua':
+                                document.getElementsByClassName('td')[0].setAttribute('data-label', 'Rua')
+                                break
+                            case 'bairro':
+                                document.getElementsByClassName('td')[1].setAttribute('data-label', 'Bairro')
+                                break
+                            case 'cidade':
+                                document.getElementsByClassName('td')[2].setAttribute('data-label', 'Cidade')
+                                break
+                            case 'estado':
+                                document.getElementsByClassName('td')[3].setAttribute('data-label', 'Estado')
+                                break
+                            case 'complemento':
+                                document.getElementsByClassName('td')[4].setAttribute('data-label', 'Complemento')
+                                break
+                            default:
+                                document.getElementsByClassName('td')[5].setAttribute('data-label', 'CEP')
+                        }
                     }
+                    // Displaying the table onto the screen after is fully filled
                     let table = document.getElementById('table')
                     table.style.display = 'table'
                 }
@@ -134,10 +162,14 @@ const get_json = () => {
 document.getElementById("search").addEventListener('click', get_json)
 
 // Adding the 'enter' button to also trigger the event
-const input_field = document.getElementById("input");
+const input_field = document.getElementById("input")
 input_field.addEventListener("keyup", function (event) {
     if (event.keyCode === 13) {
-        event.preventDefault();
+        event.preventDefault()
         document.getElementById("search").click();
     }
-});
+})
+
+// Attaching the update_table() function to the onload property, in case that the table loads with the
+// display block activated
+document.getElementById('table').onload(update_table())

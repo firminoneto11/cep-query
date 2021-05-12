@@ -1,0 +1,42 @@
+
+@media screen and (max-width: 768px) {
+
+    .table thead {
+        display: none;
+    }
+    .table th, .table td {
+        border-right: none;
+    }
+    .table tbody tr {
+        border-bottom: none;
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+    }
+
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        color: #28262C;
+        background-color: #D4C2FC;
+        border: #F9F5FF solid 1px;
+        border-radius: 5px;
+    }
+    
+    .table td::before {
+        content: attr(data-label);
+        text-align: left;
+        padding-left: 1%;
+        position: absolute;
+        left: 0;
+        width: 50%;
+        font-weight: bold;
+        color: #28262C;
+    }
+
+    .title {
+        font-size: 1.9rem;
+    }
+}

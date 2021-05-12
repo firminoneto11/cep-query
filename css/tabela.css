@@ -19,9 +19,8 @@
     border-collapse: collapse;
     margin: 25px;
     font-size: 1rem;
-    min-width: fit-content;
     width: 50%;
-    background-color: #B1B6A6;
+    background-color: #D4C2FC;
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
@@ -29,22 +28,17 @@
     padding: 500px;
     font-family: Helvetica;
     text-align: center;
-    border: #696773 solid 1px;
+    border: #F9F5FF solid 1px;
     border-radius: 5px;
     display: none;
 }
 
 .table thead tr {
-    background-color: #696773;
-    color: #eeeeee;
-    font-weight: normal;
+    background-color: #28262C;
+    color: #F9F5FF;
 }
 
 .table th, .table td {
     padding: 15px;
-    border-right: grey solid 1px;
-}
-
-.table tbody tr {
-    border-bottom: 1px solid #dddddd;
+    border-right: #F9F5FF solid 1px;
 }
