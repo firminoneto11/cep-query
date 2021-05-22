@@ -11,6 +11,15 @@
     <link rel="stylesheet" href="./css/tabela.css">
     <link rel="stylesheet" href="./css/footer.css">
     <link rel="stylesheet" href="./css/responsive_table.css">
+    <link rel="stylesheet" href="./css/mapa.css">
+    <!--Global variable-->
+    <script>
+        var geolocation_json
+    </script>
+    <!--Maps stuff-->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="./js/maps.js"></script>
+    <!--Title-->
     <title>Consulta CEP</title>
     <!--Calling font_awesome script-->
     <script src="https://kit.fontawesome.com/5519e027be.js" crossorigin="anonymous"></script>
@@ -23,7 +32,7 @@
         <h1 class="title">Consulte a localidade de um CEP</h1>
     </header>
 
-    <main>
+    <main class="container">
         <div class="mini_form">
             <input id="input" class="input" type="text" placeholder="Insira um número de CEP (Apenas números)."
                 autocomplete="off">
@@ -33,7 +42,7 @@
         <hr id="separator" class="separator">
 
         <div class="result">
-            <table id="table" class="table">
+            <table id="table" class="table container">
                 <thead>
                     <th>Rua</th>
                     <th>Bairro</th>
@@ -47,6 +56,10 @@
                     <tr></tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="container">
+            <div id="map" class="map"></div>
         </div>
     </main>
 
@@ -63,7 +76,12 @@
         </div>
     </footer>
 
+    <!--Calling the google maps api-->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDH3MaFhz3QjbMd-XvYc79DoBj0XE5x_8&callback=initMap&libraries=&v=weekly"
+        async></script>
     <!--Calling my script-->
+    <script src="./js/styles.js"></script>
     <script src=" ./js/script.js"></script>
 </body>
 

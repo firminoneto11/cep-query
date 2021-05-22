@@ -1,8 +1,11 @@
+let inputted_cep
+let coords = []
 
 const get_url_or_null = () => {
     let element = document.getElementById('input')
     let validation = validate_cep(element.value)
     const url = `https://viacep.com.br/ws/${element.value}/json/`
+    inputted_cep = element.value
     element.value = ""
 
     // This code will check if the input given is valid as a CEP number and will return the url if it is
@@ -42,6 +45,11 @@ const cep_not_exists = () => {
     } else {
         element.placeholder = "O CEP informado não existe. Tente novamente."
     }
+    // Hiding the map
+    const mapa = document.getElementsByClassName('map')[0]
+    if (mapa.style.visibility == 'visible') {
+        mapa.style.visibility = 'hidden'
+    }
 }
 
 const validate_cep = (inputted_string) => {
@@ -80,7 +88,38 @@ const update_table = () => {
     }
 }
 
-const get_json = () => {
+const update_map = () => {
+    const mapa = document.getElementsByClassName('map')[0]
+    if (mapa.style.visibility == 'hidden') {
+        mapa.style.visibility = 'visible'
+    }
+}
+
+async function get_lat_long(geocode_url) {
+    if (coords.length > 0) {
+        coords.pop()
+        coords.pop()
+    }
+    const response = await fetch(geocode_url)
+    const data = await response.json()
+    // Treating the data
+    let cd = []
+    let results = data.results
+    results = results[0]
+    for (let att in results) {
+        if (att === 'geometry') {
+            let gmty = results[att]
+            let new_lat = gmty.location.lat
+            let new_lng = gmty.location.lng
+            cd.push(new_lat)
+            cd.push(new_lng)
+        }
+    }
+    // Returning the treated data
+    coords = [cd[0], cd[1]]
+}
+
+async function get_json() {
     // Restarting the css display from the table
     update_table()
     // Getting either the url or a null value
@@ -93,7 +132,7 @@ const get_json = () => {
         const request = new XMLHttpRequest()
         request.open('GET', url_or_null)
         request.send()
-        request.onload = () => {
+        request.onload = async () => {
             if (request.status === 200) {
                 let json_object = JSON.parse(request.response)
                 for (let attribute in json_object) {
@@ -148,6 +187,13 @@ const get_json = () => {
                     // Displaying the table onto the screen after is fully filled
                     let table = document.getElementById('table')
                     table.style.display = 'table'
+                    // Getting new new_coords based on CEP
+                    geolocation_json = `https://maps.googleapis.com/maps/api/geocode/json?address=${inputted_cep}&key=AIzaSyCDH3MaFhz3QjbMd-XvYc79DoBj0XE5x_8`
+
+                    // Setting the new_coords to the map
+                    await get_lat_long(geolocation_json)
+                    map.setCenter(new google.maps.LatLng(coords[0], coords[1]))
+                    update_map()
                 }
             } else {
                 console.log('A API não está funcionando no momento.')
@@ -172,4 +218,4 @@ input_field.addEventListener("keyup", function (event) {
 
 // Attaching the update_table() function to the onload property, in case that the table loads with the
 // display block activated
-document.getElementById('table').onload(update_table())
+document.getElementById('table').onload = update_table()

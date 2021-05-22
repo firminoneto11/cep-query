@@ -1,6 +1,10 @@
 
 @media screen and (max-width: 768px) {
 
+    .table {
+        width: 90%;
+    }
+
     .table thead {
         display: none;
     }

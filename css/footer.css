@@ -1,9 +1,6 @@
 
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 2.5%;
 }
 
 .footer {
@@ -13,6 +10,7 @@ footer {
     font-family: Helvetica;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    margin-bottom: 1rem;
 }
 
 .link {
@@ -28,7 +26,6 @@ footer {
 }
 
 .links {
-    margin-top: 5%;
     text-align: center;
 }
 
@@ -36,6 +33,7 @@ footer {
     font-size: 2.5rem;
     color: #998FC7;
     transition: 0.3s;
+    margin-right: 6px;
 }
 
 .links a:hover {

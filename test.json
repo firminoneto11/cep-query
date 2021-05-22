@@ -1,0 +1,64 @@
+{
+    "results" : [
+       {
+          "address_components" : [
+             {
+                "long_name" : "64018-520",
+                "short_name" : "64018-520",
+                "types" : [ "postal_code" ]
+             },
+             {
+                "long_name" : "Vermelha",
+                "short_name" : "Vermelha",
+                "types" : [ "political", "sublocality", "sublocality_level_1" ]
+             },
+             {
+                "long_name" : "Teresina",
+                "short_name" : "Teresina",
+                "types" : [ "administrative_area_level_2", "political" ]
+             },
+             {
+                "long_name" : "Piauí",
+                "short_name" : "PI",
+                "types" : [ "administrative_area_level_1", "political" ]
+             },
+             {
+                "long_name" : "Brasil",
+                "short_name" : "BR",
+                "types" : [ "country", "political" ]
+             }
+          ],
+          "formatted_address" : "Vermelha, Teresina - PI, 64018-520, Brasil",
+          "geometry" : {
+             "bounds" : {
+                "northeast" : {
+                   "lat" : -5.1028291,
+                   "lng" : -42.8040394
+                },
+                "southwest" : {
+                   "lat" : -5.1137938,
+                   "lng" : -42.80900250000001
+                }
+             },
+             "location" : {
+                "lat" : -5.1079081,
+                "lng" : -42.8066489
+             },
+             "location_type" : "APPROXIMATE",
+             "viewport" : {
+                "northeast" : {
+                   "lat" : -5.1028291,
+                   "lng" : -42.8040394
+                },
+                "southwest" : {
+                   "lat" : -5.1137938,
+                   "lng" : -42.80900250000001
+                }
+             }
+          },
+          "place_id" : "ChIJ0aUP_GQ3jgcRUZ0Thu7sqTE",
+          "types" : [ "postal_code" ]
+       }
+    ],
+    "status" : "OK"
+ }
